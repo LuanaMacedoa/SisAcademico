@@ -34,7 +34,7 @@ O Sistema Acadêmico é um sistema desenvolvido em **Java** que visa apoiar o ac
 - Versionamento: Utilização de ferramentas de controle de versão (Git).
 - Extensibilidade: Sistema pronto para evoluir, suportando novos tipos de componentes formativos de forma uniforme.
 
-### Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Linguagem:** Java
 - **Gerenciador de Build:** Maven
