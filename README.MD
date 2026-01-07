@@ -14,12 +14,6 @@
 
 Este trabalho foi desenvolvido como atividade avaliativa para a disciplina de Programação Orientada a Objetos do curso de Tecnologia em Sistemas para Internet do IFPB. O objetivo é consolidar o aprendizado dos conceitos de POO através de um projeto prático que simula cenários reais da área de redes de computadores.
 
-**Requisitos além dos Casos de Uso presentes no PDF**
-
-- Arquitetura em Camadas: Model, View, Controller (MVC)
-- Padronização Java: nomenclaturas de classe, métodos e atributos, além de identação correta
-- Versionamento: Utilização de ferramentas de controle de versão (Git)
-- Extensibilidade: Sistema pronto para evoluir, suportando novos tipos de componentes formativos de forma uniforme
 
 ## Sobre o Projeto
 
@@ -33,6 +27,12 @@ O Sistema Acadêmico é um sistema desenvolvido em **Java** que visa apoiar o ac
 - **Resultados:** Cálculo de médias e definição da situação final (Aprovado e Reprovado) (UC09), consulta da situação individual (UC10) e listagem geral de alunos matriculados (UC13)
 - **Consultas:** Listagem de componentes Acadêmicos (UC11) e detalhamento de avaliações por aluno/disciplina (UC12)
 
+**Requisitos além dos Casos de Uso presentes no PDF**
+
+- Arquitetura em Camadas: Model, View, Controller (MVC).
+- Padronização Java: nomenclaturas de classe, métodos e atributos, além de identação correta.
+- Versionamento: Utilização de ferramentas de controle de versão (Git).
+- Extensibilidade: Sistema pronto para evoluir, suportando novos tipos de componentes formativos de forma uniforme.
 
 ### Tecnologias Utilizadas
 
