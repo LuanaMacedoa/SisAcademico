@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Professor {
+public class ProfessorModel {
     private String nome;
 
     @Override

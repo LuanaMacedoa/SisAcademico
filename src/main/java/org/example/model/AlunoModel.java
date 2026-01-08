@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Aluno {
+public class AlunoModel {
     private String nome;
     private long matricula; 
 
     @Override
     public String toString() {
-        return "Aluno: " + nome + "Matrícula: " + matricula;
+        return "Aluno: " + nome + " (M - " + matricula + ")";
     }
 }

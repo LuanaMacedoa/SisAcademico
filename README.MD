@@ -14,7 +14,6 @@
 
 Este trabalho foi desenvolvido como atividade avaliativa para a disciplina de Programação Orientada a Objetos do curso de Tecnologia em Sistemas para Internet do IFPB. O objetivo é consolidar o aprendizado dos conceitos de POO através de um projeto prático que simula cenários reais da área de redes de computadores.
 
-
 ## Sobre o Projeto
 
 O Sistema Acadêmico é um sistema desenvolvido em **Java** que visa apoiar o acompanhamento de alunos em uma instituição de ensino, o desafio central é gerenciar dois tipos distintos de Componentes formativos: disciplinas regulares (presenciais ou online) e estágios (vivência prática externa), cada um com suas próprias regras de avaliação e cálculo de desempenho.
