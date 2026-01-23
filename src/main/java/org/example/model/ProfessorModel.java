@@ -7,9 +7,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class ProfessorModel {
     private String nome;
+    private long id;
 
     @Override
     public String toString() {
-        return "Professor: " + nome;
+        return "Professor: " + nome + " (ID - " + id + ")";
     }
 }
