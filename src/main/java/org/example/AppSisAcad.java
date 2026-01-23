@@ -38,7 +38,6 @@ public class AppSisAcad {
                     String nome = keyboard.nextLine();
                     System.out.print("Matrícula: ");
                     long matricula = keyboard.nextLong();
-                    // USA O CONTROLLER DE ALUNO
                     if (alunoCtrl.adicionarAluno(nome, matricula)) {
                         System.out.println("Aluno cadastrado com sucesso!");
                     } else {
