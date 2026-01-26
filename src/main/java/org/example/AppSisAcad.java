@@ -4,8 +4,10 @@ import java.util.Scanner;
 
 import org.example.view.AlunoView;
 import org.example.view.DisciplinaView;
+import org.example.view.EstagioView;
 import org.example.controller.AlunoController;
 import org.example.controller.DisciplinaController;
+import org.example.controller.EstagioController;
 import org.example.view.ProfessorView;
 import org.example.controller.ProfessorController;
 
@@ -21,6 +23,9 @@ public class AppSisAcad {
         DisciplinaController discipCtrl = new DisciplinaController();
         DisciplinaView discipView = new DisciplinaView();
 
+        EstagioController estagCtrl = new EstagioController();
+        EstagioView estagView = new EstagioView();
+
         Scanner keyboard = new Scanner(System.in);
 
         int opcao = -1;
@@ -32,6 +37,8 @@ public class AppSisAcad {
             System.out.println("4. Listar Professores");
             System.out.println("5. Cadastrar Disciplina");
             System.out.println("6. Listar Disciplinas");
+            System.out.println("7. Cadastrar Estágio");
+            System.out.println("8. Listar Estágios");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             
@@ -79,7 +86,7 @@ public class AppSisAcad {
                     System.out.println("Digite a carga Horária de " + nomeD);
                     int carga = keyboard.nextInt();
                     if (discipCtrl.adicionarDisciplina(nomeD, carga, codD)) {
-                        System.out.println("Disciplina cadastrada com sucesso");
+                        System.out.println("Disciplina cadastrada com sucesso!");
                     } else {
                         System.out.println("Erro: Disciplina com este Nome e Código já existe.");
                     }
@@ -88,7 +95,24 @@ public class AppSisAcad {
                 case 6:
                     discipView.exibirListaProfessores(discipCtrl.listarDisciplinas());
                     break;
-                    
+                
+                case 7:
+                    System.out.println("Nome do Estágio: ");
+                    String nomeE = keyboard.nextLine();
+                    System.out.println("Descrição da Disciplina: ");
+                    String descricao = keyboard.nextLine();
+                    if (estagCtrl.adicionarEstagio(nomeE, descricao)) {
+                        System.out.println("Estágio cadastrado com sucesso!");
+                    } else {
+                        System.out.println("Erro: Estágio com este Nome já existe");
+                    }
+                    break;
+
+                case 8:
+                    // FIXME: ajeitar o metodo aqui
+                    estagView.exibirListaEstagio(estagCtrl.listarEstagios());
+                    break;
+
                 case 0:
                     System.out.println("Encerrando sistema...");
                     break;
