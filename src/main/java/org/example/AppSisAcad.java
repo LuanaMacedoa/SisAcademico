@@ -3,8 +3,9 @@ package org.example;
 import java.util.Scanner;
 
 import org.example.view.AlunoView;
+import org.example.view.DisciplinaView;
 import org.example.controller.AlunoController;
-
+import org.example.controller.DisciplinaController;
 import org.example.view.ProfessorView;
 import org.example.controller.ProfessorController;
 
@@ -17,6 +18,9 @@ public class AppSisAcad {
         ProfessorController profCtrl = new ProfessorController();
         ProfessorView profView = new ProfessorView();
 
+        DisciplinaController discipCtrl = new DisciplinaController();
+        DisciplinaView discipView = new DisciplinaView();
+
         Scanner keyboard = new Scanner(System.in);
 
         int opcao = -1;
@@ -26,6 +30,8 @@ public class AppSisAcad {
             System.out.println("2. Listar Alunos");
             System.out.println("3. Cadastrar Professor");
             System.out.println("4. Listar Professores");
+            System.out.println("5. Cadastrar Disciplina");
+            System.out.println("6. Listar Disciplinas");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             
@@ -65,6 +71,24 @@ public class AppSisAcad {
                     profView.exibirListaProfessores(profCtrl.listarProfessores());
                     break;
 
+                case 5:
+                    System.out.println("Nome da Disciplina: ");
+                    String nomeD = keyboard.nextLine();
+                    System.out.println("Código da Disciplina: ");
+                    long codD = keyboard.nextLong();
+                    System.out.println("Digite a carga Horária de " + nomeD);
+                    int carga = keyboard.nextInt();
+                    if (discipCtrl.adicionarDisciplina(nomeD, carga, codD)) {
+                        System.out.println("Disciplina cadastrada com sucesso");
+                    } else {
+                        System.out.println("Erro: Disciplina com este Nome e Código já existe.");
+                    }
+                    break;
+
+                case 6:
+                    discipView.exibirListaProfessores(discipCtrl.listarDisciplinas());
+                    break;
+                    
                 case 0:
                     System.out.println("Encerrando sistema...");
                     break;
