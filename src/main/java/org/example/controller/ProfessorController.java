@@ -7,14 +7,13 @@ import java.util.List;
 public class ProfessorController {
     private List<ProfessorModel> professores = new ArrayList<>();
     
-    public boolean adicionarProfessor(String nome, long matricula) {
+    public boolean cadastrar(ProfessorModel professor) {
         for (ProfessorModel p : professores) {
-            if (p.getMatricula() == matricula) {
+            if (p.getMatricula() == professor.getMatricula()) {
                 return false; 
             }
         }
-        
-        professores.add(new ProfessorModel(nome, matricula));
+        professores.add(professor);
         return true;
     }
     

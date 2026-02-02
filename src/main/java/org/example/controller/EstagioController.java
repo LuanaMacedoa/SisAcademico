@@ -8,14 +8,13 @@ import java.util.List;
 public class EstagioController {
         private List<EstagioModel> estagios = new ArrayList<>();
     
-    public boolean adicionarEstagio(String nome, String descricao) {
+    public boolean cadastrar(EstagioModel estagio) {
         for (EstagioModel e : estagios) {
-            if (e.getNome().equals(nome) && e.getDescricao().equals(descricao)) {
+            if (e.getNome().equals(estagio.getNome())) {
                 return false; 
             }
         }
-    
-        estagios.add(new EstagioModel(nome, descricao));
+        estagios.add(estagio);
         return true;
     }
     

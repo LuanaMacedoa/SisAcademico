@@ -1,14 +1,18 @@
 package org.example.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class DisciplinaModel {
     private String nome;
     private int cargaHoraria;
     private long codigo;
+
+    public DisciplinaModel(String nome, int cargaHoraria, long codigo) {
+        this.nome = nome;
+        this.cargaHoraria = cargaHoraria;
+        this.codigo = codigo;
+    }
 
     @Override
     public String toString() {

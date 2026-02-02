@@ -9,14 +9,13 @@ public class DisciplinaController {
     private List<DisciplinaModel> disciplinas = new ArrayList<>();
 
 
-    public boolean adicionarDisciplina(String nome, int cargaHoraria, long codigo) {
+    public boolean cadastrar(DisciplinaModel disciplina) {
         for (DisciplinaModel d : disciplinas) {
-            if (d.getNome().equals(nome) && d.getCodigo() == codigo) {
+            if (d.getNome().equals(disciplina.getNome())) {
                 return false; 
             }
         }
-
-        disciplinas.add(new DisciplinaModel(nome, cargaHoraria, codigo));
+        disciplinas.add(disciplina);
         return true;
     }
 
