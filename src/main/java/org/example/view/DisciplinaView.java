@@ -4,7 +4,7 @@ import org.example.model.DisciplinaModel;
 import java.util.List;
 
 public class DisciplinaView {
-    public void exibirListaProfessores(List<DisciplinaModel> disciplinas) {
+    public void exibirListaDisciplinas(List<DisciplinaModel> disciplinas) {
         System.out.println("\n");
         if (disciplinas.isEmpty()) {
             System.out.println("Nenhuma disciplina cadastrada.");

@@ -93,7 +93,7 @@ public class AppSisAcad {
                     break;
 
                 case 6:
-                    discipView.exibirListaProfessores(discipCtrl.listarDisciplinas());
+                    discipView.exibirListaDisciplinas(discipCtrl.listarDisciplinas());
                     break;
                 
                 case 7:
@@ -109,8 +109,7 @@ public class AppSisAcad {
                     break;
 
                 case 8:
-                    // FIXME: ajeitar o metodo aqui
-                    estagView.exibirListaEstagio(estagCtrl.listarEstagios());
+                    estagView.exibirListaEstagios(estagCtrl.listarEstagios());
                     break;
 
                 case 0:

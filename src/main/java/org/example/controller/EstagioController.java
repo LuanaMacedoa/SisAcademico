@@ -10,7 +10,7 @@ public class EstagioController {
     
     public boolean adicionarEstagio(String nome, String descricao) {
         for (EstagioModel e : estagios) {
-            if (e.getNome() == nome && e.getDescricao() == descricao) {
+            if (e.getNome().equals(nome) && e.getDescricao().equals(descricao)) {
                 return false; 
             }
         }
