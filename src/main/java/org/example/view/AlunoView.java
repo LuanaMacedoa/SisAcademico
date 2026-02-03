@@ -44,7 +44,7 @@ public class AlunoView {
         System.out.println("\nDESEMPENHO ALUNO");
         System.out.println("Nome: " + aluno.getNome());
         System.out.println("Matrícula: " + aluno.getMatricula());
-        System.out.println("\n--- Disciplinas ---");
+        System.out.println("\nDisciplinas");
         
         if (aluno.getDisciplinas().isEmpty()) {
             System.out.println("Nenhuma disciplina matriculada.");
@@ -57,13 +57,13 @@ public class AlunoView {
                 if (aluno.podeCalcularMediaDisciplina(disc.getCodigo())) {
                     double media = aluno.calcularMediaDisciplina(disc.getCodigo());
                     System.out.println("   Média: " + String.format("%.2f", media));
-                    System.out.println("   Status: " + (aluno.aprovadoEmDisciplina(disc.getCodigo()) ? "✓ APROVADO" : "✗ REPROVADO"));
+                    System.out.println("   Status: " + (aluno.aprovadoEmDisciplina(disc.getCodigo()) ? "APROVADO" : "REPROVADO"));
                 } else {
                     System.out.println("   Média: Não calculada (mínimo 2 notas)");
                 }
             }
         }
-        System.out.println("\n========================================\n");
+        System.out.println("\n\n");
     }
     
     public void adicionarNotasDisciplina(AlunoModel aluno, DisciplinaModel disciplina) {
