@@ -15,6 +15,7 @@ public class AlunoModel {
     private long matricula;
     private List<DisciplinaModel> disciplinas = new ArrayList<>();
     private Map<Long, List<Double>> notasPorDisciplina = new HashMap<>();
+    private List<EstagioModel> estagios = new ArrayList<>();
 
     public AlunoModel(String nome, long matricula) {
         this.nome = nome;
@@ -78,4 +79,19 @@ public class AlunoModel {
     public String toString() {
         return "Aluno: " + nome + " (M - " + matricula + ")";
     }
+
+    public boolean adicionarEstagio(EstagioModel estagio) {
+        for (EstagioModel e : estagios) {
+            if (e.getNome().equals(estagio.getNome())) {
+                return false;
+            }
+        }
+        estagios.add(estagio);
+        return true;
+    }
+    public List<EstagioModel> getEstagios() {
+        return estagios;
+    }
+
+
 }

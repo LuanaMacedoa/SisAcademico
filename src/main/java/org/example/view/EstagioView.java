@@ -32,15 +32,4 @@ public class EstagioView {
         String descricao = menuView.obterEntrada("Descrição do Estágio: ");
         return new EstagioModel(nome, descricao);
     }
-
-    public void obterMediaEstagio(EstagioModel estagio) {
-        System.out.println("\nInformando média para estágio: " + estagio.getNome());
-        double media = menuView.obterDouble("Digite a média do estágio (0-100): ");
-        if (estagio.informarMedia(media)) {
-            menuView.exibirMensagem("Média registrada: " + String.format("%.2f", estagio.getMedia()));
-            menuView.exibirMensagem("Status: " + (estagio.aprovado() ? "APROVADO" : "REPROVADO"));
-        } else {
-            menuView.exibirMensagem("Erro: Média deve estar entre 0 e 100.");
-        }
-    }
 }

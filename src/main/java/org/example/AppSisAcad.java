@@ -1,5 +1,7 @@
 package org.example;
-
+// caso aluno nn esteja cadastrado em estagio refatorar para excessao ao inves de if
+// pensar se vincula um professor a uma disciplina
+// arrumar parte em que está pegando 2 notas de 1 vez e colocar uma exceçao caso as notas forem emnor que 2 nn tem como calcular media
 import java.util.Scanner;
 
 import org.example.view.AlunoView;
@@ -31,7 +33,7 @@ public class AppSisAcad {
         Scanner keyboard = new Scanner(System.in);
         MenuView menuView = new MenuView(keyboard);
         MenuController menuCtrl = new MenuController(menuView, alunoCtrl, alunoView,
-                                                     profCtrl, profView, discipCtrl, discipView,
+                                                      profCtrl, profView, discipCtrl, discipView,
                                                      estagCtrl, estagView);
 
         int opcao = -1;

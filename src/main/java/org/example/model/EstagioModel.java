@@ -2,29 +2,39 @@ package org.example.model;
 
 import lombok.Data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Data
 public class EstagioModel {
     private static final double MEDIA_MINIMA = 70.0;
     
     private String nome;
     private String descricao;
-    private double media = 0.0;
+    private Map<Long, Double> media = new HashMap<>();
 
     public EstagioModel(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    public boolean informarMedia(double media) {
-        if (media < 0 || media > 100) {
+    public boolean informarMedia(long matriculaAluno, double valor) {
+        if (valor < 0 || valor > 100) {
             return false;
         }
-        this.media = media;
+        media.put(matriculaAluno, valor);
         return true;
     }
 
-    public boolean aprovado() {
-        return media >= MEDIA_MINIMA;
+    public Double obterMedia(long matriculaAluno) {
+        return media.get(matriculaAluno);
+    }
+
+
+    public boolean aprovado(long matriculaAluno) {
+        Double valor = media.get(matriculaAluno);
+        if (valor == null) return false;
+        return valor >= MEDIA_MINIMA;
     }
 
     public double getMediaMinima() {

@@ -2,12 +2,15 @@ package org.example.view;
 
 import org.example.model.AlunoModel;
 import org.example.model.DisciplinaModel;
+import org.example.model.EstagioModel;
+
 import java.util.List;
 
 public class AlunoView {
     private MenuView menuView;
 
-    public AlunoView() {}
+    public AlunoView() {
+    }
 
     public AlunoView(MenuView menuView) {
         this.menuView = menuView;
@@ -22,7 +25,7 @@ public class AlunoView {
         if (alunos.isEmpty()) {
             System.out.println("Nenhum aluno cadastrado.");
         } else {
-            for (int i = 0; i <alunos.size(); i++) {
+            for (int i = 0; i < alunos.size(); i++) {
                 System.out.println((i + 1) + ". " + alunos.get(i));
             }
         }
@@ -45,7 +48,7 @@ public class AlunoView {
         System.out.println("Nome: " + aluno.getNome());
         System.out.println("Matrícula: " + aluno.getMatricula());
         System.out.println("\nDisciplinas");
-        
+
         if (aluno.getDisciplinas().isEmpty()) {
             System.out.println("Nenhuma disciplina matriculada.");
         } else {
@@ -65,18 +68,18 @@ public class AlunoView {
         }
         System.out.println("\n\n");
     }
-    
+
     public void adicionarNotasDisciplina(AlunoModel aluno, DisciplinaModel disciplina) {
         System.out.println("\nAdicionando notas para aluno " + aluno.getNome() + " em " + disciplina.getNome());
         boolean adicionarMais = true;
         int contador = aluno.obterNotasDisciplina(disciplina.getCodigo()).size();
-        
+
         while (adicionarMais && contador < 10) {
             double nota = menuView.obterDouble("Digite a nota (0-100): ");
             if (aluno.adicionarNotaDisciplina(disciplina.getCodigo(), nota)) {
                 contador++;
                 menuView.exibirMensagem("Nota adicionada com sucesso! Total de notas: " + contador);
-                
+
                 if (contador >= 2) {
                     String continuar = menuView.obterEntrada("Adicionar mais notas? (s/n): ");
                     adicionarMais = continuar.equalsIgnoreCase("s");
@@ -85,13 +88,56 @@ public class AlunoView {
                 menuView.exibirMensagem("Erro: Nota deve estar entre 0 e 100.");
             }
         }
-        
+
         if (contador >= 2) {
             double media = aluno.calcularMediaDisciplina(disciplina.getCodigo());
             menuView.exibirMensagem("Média calculada: " + String.format("%.2f", media));
             menuView.exibirMensagem("Status: " + (aluno.aprovadoEmDisciplina(disciplina.getCodigo()) ? "APROVADO" : "REPROVADO"));
         } else {
             menuView.exibirMensagem("Mínimo de 2 notas não atingido. Média não calculada.");
+        }
+    }
+
+    public void exibirSituacaoAcademica(AlunoModel aluno) {
+        System.out.println("\n===== SITUAÇÃO ACADÊMICA DO ALUNO =====");
+        System.out.println("Nome: " + aluno.getNome());
+        System.out.println("Matrícula: " + aluno.getMatricula());
+
+        // DISCIPLINAS
+        System.out.println("\nDisciplinas:");
+        if (aluno.getDisciplinas().isEmpty()) {
+            System.out.println("Nenhuma disciplina matriculada.");
+        } else {
+            for (DisciplinaModel disc : aluno.getDisciplinas()) {
+                System.out.println("- " + disc.getNome());
+                List<Double> notas = aluno.obterNotasDisciplina(disc.getCodigo());
+                System.out.println("  Notas: " + notas);
+
+                if (aluno.podeCalcularMediaDisciplina(disc.getCodigo())) {
+                    double media = aluno.calcularMediaDisciplina(disc.getCodigo());
+                    System.out.println("  Média: " + String.format("%.2f", media));
+                    System.out.println("  Status: " +
+                            (aluno.aprovadoEmDisciplina(disc.getCodigo()) ? "APROVADO" : "REPROVADO"));
+                } else {
+                    System.out.println("  Média: Não calculada");
+                }
+            }
+        }
+
+        // ESTÁGIOS
+        System.out.println("\nEstágios:");
+        if (aluno.getEstagios() == null || aluno.getEstagios().isEmpty()) {
+            System.out.println("Nenhum estágio matriculado.");
+        } else {
+            for (EstagioModel estagio : aluno.getEstagios()) {
+                System.out.println("- Nome: " + estagio.getNome());
+
+                if (estagio.getMedia() == null) {
+                    System.out.println("  Média: Não informada");
+                } else {
+                    System.out.println("  Médias registradas: " + estagio.getMedia());
+                }
+            }
         }
     }
 }

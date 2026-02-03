@@ -2,6 +2,7 @@ package org.example.controller;
 
 import java.util.List;
 
+import org.example.model.EstagioModel;
 import org.example.view.AlunoView;
 import org.example.view.DisciplinaView;
 import org.example.view.EstagioView;
@@ -194,6 +195,140 @@ public class MenuController {
                 }
 
                 alunoView.exibirDesempenhoAluno(alunoBuscado);
+                break;
+            }
+
+            case 12: {
+                List<AlunoModel> alunos = alunoCtrl.listarAlunos();
+                if (alunos.isEmpty()) {
+                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    break;
+                }
+
+                List<EstagioModel> estagios = estagCtrl.listarEstagios();
+                if (estagios.isEmpty()) {
+                    menuView.exibirMensagem("Nenhum estágio cadastrado.");
+                    break;
+                }
+
+
+                AlunoModel alunoSelecionado = alunoView.obterDadosMatricula(alunos);
+                AlunoModel alunoBuscado = alunoCtrl.buscarAlunoPorMatricula(alunoSelecionado.getMatricula());
+
+                if (alunoBuscado == null) {
+                    menuView.exibirMensagem("Aluno não encontrado.");
+                    break;
+                }
+
+
+                estagView.exibirListaEstagios(estagios);
+                int opcEstagio = menuView.obterInt("Escolha o estágio (número): ");
+
+                if (opcEstagio < 1 || opcEstagio > estagios.size()) {
+                    menuView.exibirMensagem("Opção inválida.");
+                    break;
+                }
+
+                EstagioModel estagioSelecionado = estagios.get(opcEstagio - 1);
+
+                if (alunoCtrl.matricularAlunoEmEstagio(alunoBuscado.getMatricula(), estagioSelecionado)) {
+                    menuView.exibirMensagem("Aluno matriculado no estágio com sucesso!");
+                } else {
+                    menuView.exibirMensagem("Erro: aluno já matriculado neste estágio.");
+                }
+
+                break;
+            }
+
+            case 13: {
+                List<AlunoModel> alunos = alunoCtrl.listarAlunos();
+                if (alunos.isEmpty()) {
+                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    break;
+                }
+
+                AlunoModel alunoSel = alunoView.obterDadosMatricula(alunos);
+                AlunoModel aluno = alunoCtrl.buscarAlunoPorMatricula(alunoSel.getMatricula());
+
+                if (aluno == null) {
+                    menuView.exibirMensagem("Aluno não encontrado.");
+                    break;
+                }
+
+                if (aluno.getEstagios().isEmpty()) {
+                    menuView.exibirMensagem("Aluno não está matriculado em estágio.");
+                    break;
+                }
+
+                System.out.println("\nEstágios do aluno:");
+                for (int i = 0; i < aluno.getEstagios().size(); i++) {
+                    System.out.println((i + 1) + ". " + aluno.getEstagios().get(i).getNome());
+                }
+
+                int opc = menuView.obterInt("Escolha o estágio (número): ");
+                if (opc < 1 || opc > aluno.getEstagios().size()) {
+                    menuView.exibirMensagem("Opção inválida.");
+                    break;
+                }
+
+                EstagioModel estagio = aluno.getEstagios().get(opc - 1);
+
+                double media = menuView.obterDouble("Digite a média do estágio (0-100): ");
+
+                if (alunoCtrl.registrarAvaliacaoEstagio(aluno.getMatricula(), estagio, media)) {
+                    menuView.exibirMensagem("Avaliação registrada com sucesso!");
+
+                    Double m = estagio.obterMedia(aluno.getMatricula());
+                    menuView.exibirMensagem("Média: " + m);
+                    menuView.exibirMensagem(
+                            estagio.aprovado(aluno.getMatricula())
+                                    ? "Status: APROVADO"
+                                    : "Status: REPROVADO"
+                    );
+                } else {
+                    menuView.exibirMensagem("Erro ao registrar avaliação.");
+                }
+
+                break;
+            }
+            case 14: {
+                System.out.println("\n=== COMPONENTES ACADÊMICOS ===");
+
+                System.out.println("\nDisciplinas:");
+                if (discipCtrl.listarDisciplinas().isEmpty()) {
+                    System.out.println("Nenhuma disciplina cadastrada.");
+                } else {
+                    discipView.exibirListaDisciplinas(discipCtrl.listarDisciplinas());
+                }
+
+                System.out.println("\nEstágios:");
+                if (estagCtrl.listarEstagios().isEmpty()) {
+                    System.out.println("Nenhum estágio cadastrado.");
+                } else {
+                    estagView.exibirListaEstagios(estagCtrl.listarEstagios());
+                }
+
+                break;
+            }
+
+            case 15: {
+                List<AlunoModel> alunos = alunoCtrl.listarAlunos();
+
+                if (alunos.isEmpty()) {
+                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    break;
+                }
+
+                AlunoModel alunoSelecionado = alunoView.obterDadosMatricula(alunos);
+                AlunoModel alunoBuscado =
+                        alunoCtrl.buscarAlunoPorMatricula(alunoSelecionado.getMatricula());
+
+                if (alunoBuscado == null) {
+                    menuView.exibirMensagem("Aluno não encontrado.");
+                    break;
+                }
+
+                alunoView.exibirSituacaoAcademica(alunoBuscado);
                 break;
             }
                 

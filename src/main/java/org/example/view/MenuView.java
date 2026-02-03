@@ -22,6 +22,10 @@ public class MenuView {
         System.out.println("9. Matricular Aluno em Disciplina");
         System.out.println("10. Adicionar Notas a Disciplina");
         System.out.println("11. Visualizar Desempenho do Aluno");
+        System.out.println("12. Matricular Aluno em Estágio");
+        System.out.println("13. Registrar Avaliação em Estágio");
+        System.out.println("14. Listar Componentes Acadêmicos");
+        System.out.println("15. Visualizar Situação Acadêmica do Aluno");
         System.out.println("0. Sair");
     }
 
