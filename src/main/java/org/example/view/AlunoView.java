@@ -27,7 +27,7 @@ public class AlunoView implements Cores {
         System.out.println(VERDE + "║         LISTA DE ALUNOS                ║" + RESET);
         System.out.println(VERDE + "╚════════════════════════════════════════╝" + RESET);
         if (alunos.isEmpty()) {
-            System.out.println(VERMELHO + "⚠ Nenhum aluno cadastrado." + RESET);
+            System.out.println(VERMELHO + "Nenhum aluno cadastrado." + RESET);
         } else {
             for (int i = 0; i < alunos.size(); i++) {
                 System.out.println(VERDE + "  " + (i + 1) + "." + RESET + " " + alunos.get(i));
@@ -54,7 +54,7 @@ public class AlunoView implements Cores {
         System.out.println(AZUL + "╚════════════════════════════════════════╝" + RESET);
         System.out.println(CIANO + "Nome: " + RESET + aluno.getNome());
         System.out.println(CIANO + "Matrícula: " + RESET + aluno.getMatricula());
-        System.out.println(VERDE + "\n📚 Disciplinas" + RESET);
+        System.out.println(VERDE + "\nDisciplinas" + RESET);
 
         if (aluno.getDisciplinas().isEmpty()) {
             System.out.println("Nenhuma disciplina matriculada.");
