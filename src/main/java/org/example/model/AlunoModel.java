@@ -54,14 +54,12 @@ public class AlunoModel {
             return 0.0;
         }
         
-        // Busca a disciplina para usar sua estratégia de avaliação
         DisciplinaModel disciplina = disciplinas.stream()
                 .filter(d -> d.getCodigo() == codigoDisciplina)
                 .findFirst()
                 .orElse(null);
         
         if (disciplina == null || disciplina.getEstrategiaAvaliacao() == null) {
-            // Fallback para média simples se não encontrar disciplina ou estratégia
             return notas.stream().mapToDouble(Double::doubleValue).sum() / notas.size();
         }
         
@@ -69,7 +67,6 @@ public class AlunoModel {
     }
 
     public boolean podeCalcularMediaDisciplina(long codigoDisciplina) {
-        // Busca a disciplina para verificar o número mínimo de notas
         DisciplinaModel disciplina = disciplinas.stream()
                 .filter(d -> d.getCodigo() == codigoDisciplina)
                 .findFirst()
@@ -89,14 +86,13 @@ public class AlunoModel {
         
         double media = calcularMediaDisciplina(codigoDisciplina);
         
-        // Busca a disciplina para usar sua estratégia de aprovação
         DisciplinaModel disciplina = disciplinas.stream()
                 .filter(d -> d.getCodigo() == codigoDisciplina)
                 .findFirst()
                 .orElse(null);
         
         if (disciplina == null || disciplina.getEstrategiaAvaliacao() == null) {
-            return media >= MEDIA_MINIMA; // Fallback
+            return media >= MEDIA_MINIMA;
         }
         
         return disciplina.getEstrategiaAvaliacao().aprovar(media);

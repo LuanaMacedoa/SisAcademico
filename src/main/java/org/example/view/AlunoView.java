@@ -77,26 +77,25 @@ public class AlunoView implements Cores {
     }
 
     public void adicionarNotasDisciplina(AlunoModel aluno, DisciplinaModel disciplina) throws NotasInsuficientesException {
-        System.out.println("\nAdicionando notas para aluno " + aluno.getNome() + " em " + disciplina.getNome());
-        boolean adicionarMais = true;
-        int contador = aluno.obterNotasDisciplina(disciplina.getCodigo()).size();
+        System.out.println(CIANO + "\nAdicionando notas para " + aluno.getNome() + " em " + disciplina.getNome() + RESET);
+        int totalNotas = aluno.obterNotasDisciplina(disciplina.getCodigo()).size();
+        boolean continuar = true;
 
-        while (adicionarMais && contador < 10) {
+        while (continuar) {
             double nota = menuView.obterDouble("Digite a nota (0-100): ");
+            
             if (aluno.adicionarNotaDisciplina(disciplina.getCodigo(), nota)) {
-                contador++;
-                menuView.exibirSucesso("Nota adicionada com sucesso! Total de notas: " + contador);
-
-                if (contador >= 2) {
-                    String continuar = menuView.obterEntrada("Adicionar mais notas? (s/n): ");
-                    adicionarMais = continuar.equalsIgnoreCase("s");
-                }
+                totalNotas++;
+                menuView.exibirSucesso("Nota " + String.format("%.2f", nota) + " adicionada com sucesso! Total: " + totalNotas);
+                
+                String resposta = menuView.obterEntrada("Deseja adicionar outra nota? (s/n): ");
+                continuar = resposta.equalsIgnoreCase("s");
             } else {
-                menuView.exibirErro("Nota deve estar entre 0 e 100.");
+                menuView.exibirErro("Nota deve estar entre 0 e 100. Tente novamente.");
             }
         }
 
-        verificarNotasParaCalcularMedia(aluno, disciplina, contador);
+        verificarNotasParaCalcularMedia(aluno, disciplina, totalNotas);
     }
 
     public void verificarNotasParaCalcularMedia(AlunoModel aluno, DisciplinaModel disciplina, int totalNotas) throws NotasInsuficientesException {
@@ -118,7 +117,6 @@ public class AlunoView implements Cores {
         System.out.println("Nome: " + aluno.getNome());
         System.out.println("Matrícula: " + aluno.getMatricula());
 
-        // DISCIPLINAS
         System.out.println("\nDisciplinas:");
         if (aluno.getDisciplinas().isEmpty()) {
             System.out.println("Nenhuma disciplina matriculada.");
@@ -139,7 +137,7 @@ public class AlunoView implements Cores {
             }
         }
 
-        // ESTÁGIOS
+
         System.out.println("\nEstágios:");
         if (aluno.getEstagios() == null || aluno.getEstagios().isEmpty()) {
             System.out.println("Nenhum estágio matriculado.");

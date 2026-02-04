@@ -1,7 +1,5 @@
 package org.example;
-// caso aluno nn esteja cadastrado em estagio refatorar para excessao ao inves de if
-// vincular um professor a uma disciplina
-// arrumar parte em que está pegando 2 notas de 1 vez e colocar uma exceçao caso as notas forem emnor que 2 nn tem como calcular media
+
 import java.util.Scanner;
 
 import org.example.view.AlunoView;

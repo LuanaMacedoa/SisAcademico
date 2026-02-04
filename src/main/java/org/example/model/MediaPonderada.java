@@ -12,16 +12,15 @@ public class MediaPonderada implements EstrategiaAvaliacao {
             return 0.0;
         }
         
-        // Última nota tem peso 3, penúltima peso 2, demais peso 1
         double somaNotas = 0.0;
         double somaPesos = 0.0;
         
         for (int i = 0; i < notas.size(); i++) {
             double peso = 1.0;
             if (i == notas.size() - 1) {
-                peso = 3.0; // Última nota
+                peso = 3.0;
             } else if (i == notas.size() - 2) {
-                peso = 2.0; // Penúltima nota
+                peso = 2.0;
             }
             somaNotas += notas.get(i) * peso;
             somaPesos += peso;
