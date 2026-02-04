@@ -23,18 +23,19 @@ public class MenuView implements Cores {
         System.out.println(CIANO + "\n[DISCIPLINAS]" + RESET);
         System.out.println(VERDE + "  5." + RESET + " Cadastrar Disciplina");
         System.out.println(VERDE + "  6." + RESET + " Listar Disciplinas");
+        System.out.println(VERDE + "  7." + RESET + " Vincular Professor a Disciplina");
         System.out.println(CIANO + "\n[ESTÁGIOS]" + RESET);
-        System.out.println(VERDE + "  7." + RESET + " Cadastrar Estágio");
-        System.out.println(VERDE + "  8." + RESET + " Listar Estágios");
+        System.out.println(VERDE + "  8." + RESET + " Cadastrar Estágio");
+        System.out.println(VERDE + "  9." + RESET + " Listar Estágios");
         System.out.println(CIANO + "\n[MATRÍCULAS E AVALIAÇÕES]" + RESET);
-        System.out.println(VERDE + "  9." + RESET + " Matricular Aluno em Disciplina");
-        System.out.println(VERDE + " 10." + RESET + " Adicionar Notas a Disciplina");
-        System.out.println(VERDE + " 11." + RESET + " Visualizar Desempenho do Aluno");
-        System.out.println(VERDE + " 12." + RESET + " Matricular Aluno em Estágio");
-        System.out.println(VERDE + " 13." + RESET + " Registrar Avaliação em Estágio");
+        System.out.println(VERDE + " 10." + RESET + " Matricular Aluno em Disciplina");
+        System.out.println(VERDE + " 11." + RESET + " Adicionar Notas a Disciplina");
+        System.out.println(VERDE + " 12." + RESET + " Visualizar Desempenho do Aluno");
+        System.out.println(VERDE + " 13." + RESET + " Matricular Aluno em Estágio");
+        System.out.println(VERDE + " 14." + RESET + " Registrar Avaliação em Estágio");
         System.out.println(CIANO + "\n[RELATÓRIOS]" + RESET);
-        System.out.println(VERDE + " 14." + RESET + " Listar Componentes Acadêmicos");
-        System.out.println(VERDE + " 15." + RESET + " Visualizar Situação Acadêmica do Aluno");
+        System.out.println(VERDE + " 15." + RESET + " Listar Componentes Acadêmicos");
+        System.out.println(VERDE + " 16." + RESET + " Visualizar Situação Acadêmica do Aluno");
         System.out.println(VERMELHO + "\n  0." + RESET + " Sair\n");
     }
 

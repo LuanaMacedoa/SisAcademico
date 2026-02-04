@@ -8,16 +8,21 @@ public class ProfessorController {
     private List<ProfessorModel> professores = new ArrayList<>();
     
     public boolean cadastrar(ProfessorModel professor) {
-        for (ProfessorModel p : professores) {
-            if (p.getMatricula() == professor.getMatricula()) {
-                return false; 
-            }
-        }
+        boolean existe = professores.stream()
+                .anyMatch(p -> p.getMatricula() == professor.getMatricula());
+        if (existe) return false;
         professores.add(professor);
         return true;
     }
     
     public List<ProfessorModel> listarProfessores() {
         return new ArrayList<>(professores);
+    }
+
+    public ProfessorModel buscarProfessorPorMatricula(long matricula) {
+        return professores.stream()
+                .filter(p -> p.getMatricula() == matricula)
+                .findFirst()
+                .orElse(null);
     }
 }

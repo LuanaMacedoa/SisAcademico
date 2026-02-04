@@ -4,6 +4,7 @@ import org.example.model.AlunoModel;
 import org.example.model.DisciplinaModel;
 import org.example.model.EstagioModel;
 import org.example.ui.Cores;
+import org.example.exception.NotasInsuficientesException;
 
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class AlunoView implements Cores {
         System.out.println("\n\n");
     }
 
-    public void adicionarNotasDisciplina(AlunoModel aluno, DisciplinaModel disciplina) {
+    public void adicionarNotasDisciplina(AlunoModel aluno, DisciplinaModel disciplina) throws NotasInsuficientesException {
         System.out.println("\nAdicionando notas para aluno " + aluno.getNome() + " em " + disciplina.getNome());
         boolean adicionarMais = true;
         int contador = aluno.obterNotasDisciplina(disciplina.getCodigo()).size();
@@ -95,16 +96,20 @@ public class AlunoView implements Cores {
             }
         }
 
-        if (contador >= 2) {
-            double media = aluno.calcularMediaDisciplina(disciplina.getCodigo());
-            menuView.exibirAviso("Média calculada: " + String.format("%.2f", media));
-            if (aluno.aprovadoEmDisciplina(disciplina.getCodigo())) {
-                menuView.exibirSucesso("Status: APROVADO");
-            } else {
-                menuView.exibirErro("Status: REPROVADO");
-            }
+        verificarNotasParaCalcularMedia(aluno, disciplina, contador);
+    }
+
+    public void verificarNotasParaCalcularMedia(AlunoModel aluno, DisciplinaModel disciplina, int totalNotas) throws NotasInsuficientesException {
+        if (totalNotas < 2) {
+            throw new NotasInsuficientesException("Mínimo de 2 notas não atingido. Não é possível calcular a média.");
+        }
+
+        double media = aluno.calcularMediaDisciplina(disciplina.getCodigo());
+        menuView.exibirAviso("Média calculada: " + String.format("%.2f", media));
+        if (aluno.aprovadoEmDisciplina(disciplina.getCodigo())) {
+            menuView.exibirSucesso("Status: APROVADO");
         } else {
-            menuView.exibirAviso("Mínimo de 2 notas não atingido. Média não calculada.");
+            menuView.exibirErro("Status: REPROVADO");
         }
     }
 

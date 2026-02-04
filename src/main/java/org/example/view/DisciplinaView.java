@@ -42,4 +42,9 @@ public class DisciplinaView implements Cores {
         exibirListaDisciplinas(disciplinas);
         return menuView.obterInt("Escolha a disciplina (número): ");
     }
+
+    public long obterCodigoDisciplina(List<DisciplinaModel> disciplinas) {
+        exibirListaDisciplinas(disciplinas);
+        return menuView.obterLong("Digite o código da disciplina: ");
+    }
 }

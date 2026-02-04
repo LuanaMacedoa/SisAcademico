@@ -9,11 +9,9 @@ public class EstagioController {
         private List<EstagioModel> estagios = new ArrayList<>();
     
     public boolean cadastrar(EstagioModel estagio) {
-        for (EstagioModel e : estagios) {
-            if (e.getNome().equals(estagio.getNome())) {
-                return false; 
-            }
-        }
+        boolean existe = estagios.stream()
+                .anyMatch(e -> e.getNome().equals(estagio.getNome()));
+        if (existe) return false;
         estagios.add(estagio);
         return true;
     }

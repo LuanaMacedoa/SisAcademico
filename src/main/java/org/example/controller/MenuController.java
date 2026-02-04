@@ -10,6 +10,8 @@ import org.example.view.MenuView;
 import org.example.view.ProfessorView;
 import org.example.model.AlunoModel;
 import org.example.model.DisciplinaModel;
+import org.example.exception.AlunoNaoMatriculadoEmEstagioException;
+import org.example.exception.NotasInsuficientesException;
 
 public class MenuController {
     private MenuView menuView;
@@ -90,6 +92,44 @@ public class MenuController {
                 break;
 
             case 7: {
+                List<DisciplinaModel> disciplinas = discipCtrl.listarDisciplinas();
+                if (disciplinas.isEmpty()) {
+                    menuView.exibirAviso("Nenhuma disciplina cadastrada.");
+                    break;
+                }
+
+                List<org.example.model.ProfessorModel> professores = profCtrl.listarProfessores();
+                if (professores.isEmpty()) {
+                    menuView.exibirAviso("Nenhum professor cadastrado.");
+                    break;
+                }
+
+                long codigoDisciplina = discipView.obterCodigoDisciplina(disciplinas);
+                DisciplinaModel disciplina = discipCtrl.buscarDisciplinaPorCodigo(codigoDisciplina);
+
+                if (disciplina == null) {
+                    menuView.exibirErro("Disciplina não encontrada.");
+                    break;
+                }
+
+                profView.exibirListaProfessores(professores);
+                long matriculaProfessor = menuView.obterLong("Digite a matrícula do professor: ");
+
+                org.example.model.ProfessorModel professor = profCtrl.buscarProfessorPorMatricula(matriculaProfessor);
+                if (professor == null) {
+                    menuView.exibirErro("Professor não encontrado.");
+                    break;
+                }
+
+                if (discipCtrl.vincularProfessorADisciplina(codigoDisciplina, professor)) {
+                    menuView.exibirSucesso("Professor vinculado à disciplina com sucesso!");
+                } else {
+                    menuView.exibirErro("Erro ao vincular professor à disciplina.");
+                }
+                break;
+            }
+
+            case 8: {
                 var estagio = estagView.obterDadosCadastro();
                 if (estagCtrl.cadastrar(estagio)) {
                     menuView.exibirSucesso("Estágio cadastrado com sucesso!");
@@ -99,10 +139,10 @@ public class MenuController {
                 break;
             }
 
-            case 8:
+            case 9:
                 estagView.exibirListaEstagios(estagCtrl.listarEstagios());
                 break;
-            case 9: {
+            case 10: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
                     menuView.exibirAviso("Nenhum aluno cadastrado.");
@@ -143,7 +183,7 @@ public class MenuController {
                 menuView.exibirAviso("Encerrando sistema...");
                 break;
 
-            case 10: {
+            case 11: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
                     menuView.exibirAviso("Nenhum aluno cadastrado.");
@@ -175,11 +215,15 @@ public class MenuController {
                 }
 
                 DisciplinaModel discSelecionada = alunoBuscado.getDisciplinas().get(opcDisc - 1);
-                alunoView.adicionarNotasDisciplina(alunoBuscado, discSelecionada);
+                try {
+                    alunoView.adicionarNotasDisciplina(alunoBuscado, discSelecionada);
+                } catch (NotasInsuficientesException e) {
+                    menuView.exibirErro(e.getMessage());
+                }
                 break;
             }
 
-            case 11: {
+            case 12: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
                     menuView.exibirAviso("Nenhum aluno cadastrado.");
@@ -198,7 +242,7 @@ public class MenuController {
                 break;
             }
 
-            case 12: {
+            case 13: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
                     menuView.exibirAviso("Nenhum aluno cadastrado.");
@@ -240,7 +284,7 @@ public class MenuController {
                 break;
             }
 
-            case 13: {
+            case 14: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
                     menuView.exibirAviso("Nenhum aluno cadastrado.");
@@ -255,8 +299,10 @@ public class MenuController {
                     break;
                 }
 
-                if (aluno.getEstagios().isEmpty()) {
-                    menuView.exibirAviso("Aluno não está matriculado em estágio.");
+                try {
+                    alunoCtrl.verificarMatriculaEmEstagio(aluno.getMatricula());
+                } catch (AlunoNaoMatriculadoEmEstagioException e) {
+                    menuView.exibirAviso(e.getMessage());
                     break;
                 }
 
@@ -291,7 +337,7 @@ public class MenuController {
 
                 break;
             }
-            case 14: {
+            case 15: {
                 System.out.println("\n=== COMPONENTES ACADÊMICOS ===");
 
                 System.out.println("\nDisciplinas:");
@@ -311,7 +357,7 @@ public class MenuController {
                 break;
             }
 
-            case 15: {
+            case 16: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
 
                 if (alunos.isEmpty()) {
