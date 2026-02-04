@@ -18,9 +18,9 @@ public class ProfessorView implements Cores {
     }
 
     public void exibirListaProfessores(List<ProfessorModel> professores) {
-        System.out.println(VERDE_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
-        System.out.println(VERDE_BG + BRANCO + "║       LISTA DE PROFESSORES           ║" + RESET);
-        System.out.println(VERDE_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
+        System.out.println(VERDE + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(VERDE + "║       LISTA DE PROFESSORES             ║" + RESET);
+        System.out.println(VERDE + "╚════════════════════════════════════════╝" + RESET);
         if (professores.isEmpty()) {
             System.out.println(VERMELHO + "Nenhum professor cadastrado." + RESET);
         } else {

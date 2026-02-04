@@ -11,9 +11,9 @@ public class MenuView implements Cores {
     }
 
     public void exibirMenu() {
-        System.out.println(AZUL_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
-        System.out.println(AZUL_BG + BRANCO + "║    MENU DO SISTEMA ACADÊMICO         ║" + RESET);
-        System.out.println(AZUL_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
+        System.out.println(AZUL + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(AZUL + "║    MENU DO SISTEMA ACADÊMICO           ║" + RESET);
+        System.out.println(AZUL + "╚════════════════════════════════════════╝" + RESET);
         System.out.println(CIANO + "\n[ALUNOS]" + RESET);
         System.out.println(VERDE + "  1." + RESET + " Cadastrar Aluno");
         System.out.println(VERDE + "  2." + RESET + " Listar Alunos");

@@ -53,22 +53,53 @@ public class AlunoModel {
         if (notas.isEmpty()) {
             return 0.0;
         }
-        double soma = 0;
-        for (double nota : notas) {
-            soma += nota;
+        
+        // Busca a disciplina para usar sua estratégia de avaliação
+        DisciplinaModel disciplina = disciplinas.stream()
+                .filter(d -> d.getCodigo() == codigoDisciplina)
+                .findFirst()
+                .orElse(null);
+        
+        if (disciplina == null || disciplina.getEstrategiaAvaliacao() == null) {
+            // Fallback para média simples se não encontrar disciplina ou estratégia
+            return notas.stream().mapToDouble(Double::doubleValue).sum() / notas.size();
         }
-        return soma / notas.size();
+        
+        return disciplina.getEstrategiaAvaliacao().calcularMedia(notas);
     }
 
     public boolean podeCalcularMediaDisciplina(long codigoDisciplina) {
-        return obterNotasDisciplina(codigoDisciplina).size() >= 2;
+        // Busca a disciplina para verificar o número mínimo de notas
+        DisciplinaModel disciplina = disciplinas.stream()
+                .filter(d -> d.getCodigo() == codigoDisciplina)
+                .findFirst()
+                .orElse(null);
+        
+        if (disciplina == null || disciplina.getEstrategiaAvaliacao() == null) {
+            return obterNotasDisciplina(codigoDisciplina).size() >= 2;
+        }
+        
+        return obterNotasDisciplina(codigoDisciplina).size() >= disciplina.getEstrategiaAvaliacao().getNumeroMinimoNotas();
     }
 
     public boolean aprovadoEmDisciplina(long codigoDisciplina) {
         if (!podeCalcularMediaDisciplina(codigoDisciplina)) {
             return false;
         }
-        return calcularMediaDisciplina(codigoDisciplina) >= MEDIA_MINIMA;
+        
+        double media = calcularMediaDisciplina(codigoDisciplina);
+        
+        // Busca a disciplina para usar sua estratégia de aprovação
+        DisciplinaModel disciplina = disciplinas.stream()
+                .filter(d -> d.getCodigo() == codigoDisciplina)
+                .findFirst()
+                .orElse(null);
+        
+        if (disciplina == null || disciplina.getEstrategiaAvaliacao() == null) {
+            return media >= MEDIA_MINIMA; // Fallback
+        }
+        
+        return disciplina.getEstrategiaAvaliacao().aprovar(media);
     }
 
     public double getMediaMinima() {

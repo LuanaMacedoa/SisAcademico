@@ -23,9 +23,9 @@ public class AlunoView implements Cores {
     }
 
     public void exibirListaAlunos(List<AlunoModel> alunos) {
-        System.out.println(VERDE_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
-        System.out.println(VERDE_BG + BRANCO + "║         LISTA DE ALUNOS              ║" + RESET);
-        System.out.println(VERDE_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
+        System.out.println(VERDE + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(VERDE + "║         LISTA DE ALUNOS                ║" + RESET);
+        System.out.println(VERDE + "╚════════════════════════════════════════╝" + RESET);
         if (alunos.isEmpty()) {
             System.out.println(VERMELHO + "⚠ Nenhum aluno cadastrado." + RESET);
         } else {
@@ -49,9 +49,9 @@ public class AlunoView implements Cores {
     }
 
     public void exibirDesempenhoAluno(AlunoModel aluno) {
-        System.out.println(AZUL_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
-        System.out.println(AZUL_BG + BRANCO + "║       DESEMPENHO DO ALUNO            ║" + RESET);
-        System.out.println(AZUL_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
+        System.out.println(AZUL + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(AZUL + "║       DESEMPENHO DO ALUNO              ║" + RESET);
+        System.out.println(AZUL + "╚════════════════════════════════════════╝" + RESET);
         System.out.println(CIANO + "Nome: " + RESET + aluno.getNome());
         System.out.println(CIANO + "Matrícula: " + RESET + aluno.getMatricula());
         System.out.println(VERDE + "\n📚 Disciplinas" + RESET);

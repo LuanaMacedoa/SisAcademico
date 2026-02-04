@@ -7,7 +7,6 @@ import org.example.exception.AlunoNaoMatriculadoEmEstagioException;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 import lombok.Data;
 
 @Data

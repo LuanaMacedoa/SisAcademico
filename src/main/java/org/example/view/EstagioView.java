@@ -18,9 +18,9 @@ public class EstagioView implements Cores {
     }
 
     public void exibirListaEstagios(List<EstagioModel> estagios) {
-        System.out.println(VERDE_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
-        System.out.println(VERDE_BG + BRANCO + "║        LISTA DE ESTÁGIOS             ║" + RESET);
-        System.out.println(VERDE_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
+        System.out.println(VERDE + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(VERDE + "║        LISTA DE ESTÁGIOS               ║" + RESET);
+        System.out.println(VERDE + "╚════════════════════════════════════════╝" + RESET);
         if (estagios.isEmpty()) {
             System.out.println(VERMELHO + "Nenhum estágio cadastrado." + RESET);
         } else {
