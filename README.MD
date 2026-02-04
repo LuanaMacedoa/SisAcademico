@@ -1,40 +1,51 @@
-# Projeto de Sistema Acadêmico
+# Sistema Acadêmico
 
-- **Instituição:** Instituto Federal da Paraíba (IFPB).
-- **Curso:** CST em Sistemas para Internet.
-- **Disciplina:** Programação Orientada a Objetos (POO).
-- **Professor:** Frederico Costa Guedes Pereira.
+## Informações acadêmicas
 
-**Componentes da dupla:**
+- Instituição: Instituto Federal da Paraíba (IFPB)
+- Curso: CST em Sistemas para Internet
+- Disciplina: Programação Orientada a Objetos (POO)
+- Professor: Frederico Costa Guedes Pereira
+
+## Autores
 
 - Luana Gabriella Pereira Macedo (20242370026)
 - Vinícius Ares Monteiro de Lima (20242370007)
 
-## Contexto Acadêmico
+## Contexto
 
-Este trabalho foi desenvolvido como atividade avaliativa para a disciplina de Programação Orientada a Objetos do curso de Tecnologia em Sistemas para Internet do IFPB. O objetivo é consolidar o aprendizado dos conceitos de POO através de um projeto prático que simula cenários reais da área de redes de computadores.
+Projeto avaliativo da disciplina de POO, com foco na prática de conceitos de orientação a objetos. O sistema simula o acompanhamento de alunos em uma instituição de ensino, com dois tipos de componentes formativos: disciplinas regulares (presenciais e online) e estágios, cada um com regras próprias de avaliação.
 
-## Sobre o Projeto
+## Funcionalidades
 
-O Sistema Acadêmico é um sistema desenvolvido em **Java** que visa apoiar o acompanhamento de alunos em uma instituição de ensino, o desafio central é gerenciar dois tipos distintos de Componentes formativos: disciplinas regulares (presenciais ou online) e estágios (vivência prática externa), cada um com suas próprias regras de avaliação e cálculo de desempenho.
+- Cadastros básicos: alunos (UC01), professores (UC02), disciplinas (UC03) e estágios (UC04)
+- Matrículas: vínculo de alunos em disciplinas (UC05) e em estágios (UC06)
+- Avaliação: registro de notas em disciplinas (UC07) e médias em estágio (UC08)
+- Resultados: cálculo de médias e situação final (UC09), consulta individual (UC10) e listagem geral (UC13)
+- Consultas: listagem de componentes acadêmicos (UC11) e detalhamento de avaliações (UC12)
 
-## Funcionalidades (Casos de Uso)
+## Requisitos adicionais
 
-- **Cadastros Básicos:** Alunos (UC01), Professores (UC02), Disciplinas (UC03) e Estágios (UC04)
-- **Matrículas:** Vínculo de Alunos em disciplinas (UC05) e em atividades de estágio (UC06)
-- **Avaliação de Disciplinas:** Registro de notas (mínimo de 2 notas) (UC07) e registro de avaliações/médias em estágio (UC08)
-- **Resultados:** Cálculo de médias e definição da situação final (Aprovado e Reprovado) (UC09), consulta da situação individual (UC10) e listagem geral de alunos matriculados (UC13)
-- **Consultas:** Listagem de componentes Acadêmicos (UC11) e detalhamento de avaliações por aluno/disciplina (UC12)
+- Arquitetura em camadas (MVC)
+- Padronização Java (nomenclaturas e identação)
+- Versionamento com Git
+- Extensibilidade para novos componentes formativos
 
-**Requisitos além dos Casos de Uso presentes no PDF**
+## Tecnologias
 
-- Arquitetura em Camadas: Model, View, Controller (MVC).
-- Padronização Java: nomenclaturas de classe, métodos e atributos, além de identação correta.
-- Versionamento: Utilização de ferramentas de controle de versão (Git).
-- Extensibilidade: Sistema pronto para evoluir, suportando novos tipos de componentes formativos de forma uniforme.
+- Linguagem: Java
+- Build: Maven
+- Paradigma: Programação Orientada a Objetos
 
-## Tecnologias Utilizadas
+## Como executar
 
-- **Linguagem:** Java
-- **Gerenciador de Build:** Maven
-- **Paradigma:** Programação Orientada a Objetos
+1. Compilar: `mvn -q -DskipTests package`
+2. Executar: `java -cp target/classes org.example.AppSisAcad`
+
+## Estrutura do projeto
+
+- `src/main/java/org/example/controller`: controladores
+- `src/main/java/org/example/model`: modelos e estratégias de avaliação
+- `src/main/java/org/example/view`: views de console
+- `src/main/java/org/example/exception`: exceções de domínio
+- `src/main/java/org/example/ui`: utilitários de console
