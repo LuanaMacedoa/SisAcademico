@@ -1,9 +1,10 @@
 package org.example.view;
 
 import org.example.model.EstagioModel;
+import org.example.ui.Cores;
 import java.util.List;
 
-public class EstagioView {
+public class EstagioView implements Cores {
     private MenuView menuView;
 
     public EstagioView() {}
@@ -17,14 +18,17 @@ public class EstagioView {
     }
 
     public void exibirListaEstagios(List<EstagioModel> estagios) {
-        System.out.println("\n");
+        System.out.println(VERDE_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(VERDE_BG + BRANCO + "║        LISTA DE ESTÁGIOS             ║" + RESET);
+        System.out.println(VERDE_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
         if (estagios.isEmpty()) {
-            System.out.println("Nenhum estágio cadastrado.");
+            System.out.println(VERMELHO + "Nenhum estágio cadastrado." + RESET);
         } else {
             for (int i = 0; i < estagios.size(); i++) {
-                System.out.println((i + 1) + ". " + estagios.get(i));
+                System.out.println(VERDE + "  " + (i + 1) + "." + RESET + " " + estagios.get(i));
             }
         }
+        System.out.println();
     }
 
     public EstagioModel obterDadosCadastro() {

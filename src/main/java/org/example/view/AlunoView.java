@@ -3,10 +3,11 @@ package org.example.view;
 import org.example.model.AlunoModel;
 import org.example.model.DisciplinaModel;
 import org.example.model.EstagioModel;
+import org.example.ui.Cores;
 
 import java.util.List;
 
-public class AlunoView {
+public class AlunoView implements Cores {
     private MenuView menuView;
 
     public AlunoView() {
@@ -21,14 +22,17 @@ public class AlunoView {
     }
 
     public void exibirListaAlunos(List<AlunoModel> alunos) {
-        System.out.println("\n");
+        System.out.println(VERDE_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(VERDE_BG + BRANCO + "║         LISTA DE ALUNOS              ║" + RESET);
+        System.out.println(VERDE_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
         if (alunos.isEmpty()) {
-            System.out.println("Nenhum aluno cadastrado.");
+            System.out.println(VERMELHO + "⚠ Nenhum aluno cadastrado." + RESET);
         } else {
             for (int i = 0; i < alunos.size(); i++) {
-                System.out.println((i + 1) + ". " + alunos.get(i));
+                System.out.println(VERDE + "  " + (i + 1) + "." + RESET + " " + alunos.get(i));
             }
         }
+        System.out.println();
     }
 
     public AlunoModel obterDadosCadastro() {
@@ -44,10 +48,12 @@ public class AlunoView {
     }
 
     public void exibirDesempenhoAluno(AlunoModel aluno) {
-        System.out.println("\nDESEMPENHO ALUNO");
-        System.out.println("Nome: " + aluno.getNome());
-        System.out.println("Matrícula: " + aluno.getMatricula());
-        System.out.println("\nDisciplinas");
+        System.out.println(AZUL_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(AZUL_BG + BRANCO + "║       DESEMPENHO DO ALUNO            ║" + RESET);
+        System.out.println(AZUL_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
+        System.out.println(CIANO + "Nome: " + RESET + aluno.getNome());
+        System.out.println(CIANO + "Matrícula: " + RESET + aluno.getMatricula());
+        System.out.println(VERDE + "\n📚 Disciplinas" + RESET);
 
         if (aluno.getDisciplinas().isEmpty()) {
             System.out.println("Nenhuma disciplina matriculada.");
@@ -78,23 +84,27 @@ public class AlunoView {
             double nota = menuView.obterDouble("Digite a nota (0-100): ");
             if (aluno.adicionarNotaDisciplina(disciplina.getCodigo(), nota)) {
                 contador++;
-                menuView.exibirMensagem("Nota adicionada com sucesso! Total de notas: " + contador);
+                menuView.exibirSucesso("Nota adicionada com sucesso! Total de notas: " + contador);
 
                 if (contador >= 2) {
                     String continuar = menuView.obterEntrada("Adicionar mais notas? (s/n): ");
                     adicionarMais = continuar.equalsIgnoreCase("s");
                 }
             } else {
-                menuView.exibirMensagem("Erro: Nota deve estar entre 0 e 100.");
+                menuView.exibirErro("Nota deve estar entre 0 e 100.");
             }
         }
 
         if (contador >= 2) {
             double media = aluno.calcularMediaDisciplina(disciplina.getCodigo());
-            menuView.exibirMensagem("Média calculada: " + String.format("%.2f", media));
-            menuView.exibirMensagem("Status: " + (aluno.aprovadoEmDisciplina(disciplina.getCodigo()) ? "APROVADO" : "REPROVADO"));
+            menuView.exibirAviso("Média calculada: " + String.format("%.2f", media));
+            if (aluno.aprovadoEmDisciplina(disciplina.getCodigo())) {
+                menuView.exibirSucesso("Status: APROVADO");
+            } else {
+                menuView.exibirErro("Status: REPROVADO");
+            }
         } else {
-            menuView.exibirMensagem("Mínimo de 2 notas não atingido. Média não calculada.");
+            menuView.exibirAviso("Mínimo de 2 notas não atingido. Média não calculada.");
         }
     }
 

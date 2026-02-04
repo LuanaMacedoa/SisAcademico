@@ -1,9 +1,10 @@
 package org.example.view;
 
 import org.example.model.DisciplinaModel;
+import org.example.ui.Cores;
 import java.util.List;
 
-public class DisciplinaView {
+public class DisciplinaView implements Cores {
     private MenuView menuView;
 
     public DisciplinaView() {}
@@ -17,14 +18,17 @@ public class DisciplinaView {
     }
 
     public void exibirListaDisciplinas(List<DisciplinaModel> disciplinas) {
-        System.out.println("\n");
+        System.out.println(VERDE_BG + BRANCO + "\n╔════════════════════════════════════════╗" + RESET);
+        System.out.println(VERDE_BG + BRANCO + "║      LISTA DE DISCIPLINAS            ║" + RESET);
+        System.out.println(VERDE_BG + BRANCO + "╚════════════════════════════════════════╝" + RESET);
         if (disciplinas.isEmpty()) {
-            System.out.println("Nenhuma disciplina cadastrada.");
+            System.out.println(VERMELHO + "Nenhuma disciplina cadastrada." + RESET);
         } else {
             for (int i = 0; i <disciplinas.size(); i++) {
-                System.out.println((i + 1) + ". " + disciplinas.get(i));
+                System.out.println(VERDE + "  " + (i + 1) + "." + RESET + " " + disciplinas.get(i));
             }
         }
+        System.out.println();
     }
 
     public DisciplinaModel obterDadosCadastro() {

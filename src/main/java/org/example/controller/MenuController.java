@@ -46,9 +46,9 @@ public class MenuController {
             case 1: {
                 AlunoModel aluno = alunoView.obterDadosCadastro();
                 if (alunoCtrl.cadastrar(aluno)) {
-                    menuView.exibirMensagem("Aluno cadastrado com sucesso!");
+                    menuView.exibirSucesso("Aluno cadastrado com sucesso!");
                 } else {
-                    menuView.exibirMensagem("Erro: Matrícula já existe.");
+                    menuView.exibirErro("Matrícula já existe.");
                 }
                 break;
             }
@@ -60,9 +60,9 @@ public class MenuController {
             case 3: {
                 var professor = profView.obterDadosCadastro();
                 if (profCtrl.cadastrar(professor)) {
-                    menuView.exibirMensagem("Professor cadastrado com sucesso!");
+                    menuView.exibirSucesso("Professor cadastrado com sucesso!");
                 } else {
-                    menuView.exibirMensagem("Erro: Professor com este ID já existe.");
+                    menuView.exibirErro("Professor com este ID já existe.");
                 }
                 break;
             }
@@ -73,14 +73,14 @@ public class MenuController {
 
             case 5: {
                 if (profCtrl.listarProfessores().isEmpty()) {
-                    menuView.exibirMensagem("Erro: Não há professores cadastrados. Cadastre um professor primeiro.");
+                    menuView.exibirErro("Não há professores cadastrados. Cadastre um professor primeiro.");
                     break;
                 }
                 DisciplinaModel disciplina = discipView.obterDadosCadastro();
                 if (discipCtrl.cadastrar(disciplina)) {
-                    menuView.exibirMensagem("Disciplina cadastrada com sucesso!");
+                    menuView.exibirSucesso("Disciplina cadastrada com sucesso!");
                 } else {
-                    menuView.exibirMensagem("Erro: Disciplina com este nome já existe.");
+                    menuView.exibirErro("Disciplina com este nome já existe.");
                 }
                 break;
             }
@@ -92,9 +92,9 @@ public class MenuController {
             case 7: {
                 var estagio = estagView.obterDadosCadastro();
                 if (estagCtrl.cadastrar(estagio)) {
-                    menuView.exibirMensagem("Estágio cadastrado com sucesso!");
+                    menuView.exibirSucesso("Estágio cadastrado com sucesso!");
                 } else {
-                    menuView.exibirMensagem("Erro: Estágio com este Nome já existe");
+                    menuView.exibirErro("Estágio com este nome já existe.");
                 }
                 break;
             }
@@ -105,13 +105,13 @@ public class MenuController {
             case 9: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
-                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    menuView.exibirAviso("Nenhum aluno cadastrado.");
                     break;
                 }
 
                 List<DisciplinaModel> disciplinas = discipCtrl.listarDisciplinas();
                 if (disciplinas.isEmpty()) {
-                    menuView.exibirMensagem("Nenhuma disciplina cadastrada.");
+                    menuView.exibirAviso("Nenhuma disciplina cadastrada.");
                     break;
                 }
 
@@ -119,34 +119,34 @@ public class MenuController {
                 AlunoModel alunoBuscado = alunoCtrl.buscarAlunoPorMatricula(alunoMatricula.getMatricula());
 
                 if (alunoBuscado == null) {
-                    menuView.exibirMensagem("Aluno não encontrado.");
+                    menuView.exibirErro("Aluno não encontrado.");
                     break;
                 }
 
                 int opcDisciplina = discipView.obterDisciplinaEscolhida(disciplinas);
 
                 if (opcDisciplina < 1 || opcDisciplina > disciplinas.size()) {
-                    menuView.exibirMensagem("Opção de disciplina inválida.");
+                    menuView.exibirErro("Opção de disciplina inválida.");
                     break;
                 }
 
                 DisciplinaModel disciplinaSelecionada = disciplinas.get(opcDisciplina - 1);
                 if (alunoCtrl.matricularAlunoEmDisciplina(alunoMatricula.getMatricula(), disciplinaSelecionada)) {
-                    menuView.exibirMensagem("Aluno matriculado com sucesso!");
+                    menuView.exibirSucesso("Aluno matriculado com sucesso!");
                 } else {
-                    menuView.exibirMensagem("Erro: aluno já matriculado nesta disciplina.");
+                    menuView.exibirErro("Aluno já matriculado nesta disciplina.");
                 }
                 break;
             }
 
             case 0:
-                menuView.exibirMensagem("Encerrando sistema...");
+                menuView.exibirAviso("Encerrando sistema...");
                 break;
 
             case 10: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
-                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    menuView.exibirAviso("Nenhum aluno cadastrado.");
                     break;
                 }
 
@@ -154,12 +154,12 @@ public class MenuController {
                 AlunoModel alunoBuscado = alunoCtrl.buscarAlunoPorMatricula(alunoSelecionado.getMatricula());
 
                 if (alunoBuscado == null) {
-                    menuView.exibirMensagem("Aluno não encontrado.");
+                    menuView.exibirErro("Aluno não encontrado.");
                     break;
                 }
 
                 if (alunoBuscado.getDisciplinas().isEmpty()) {
-                    menuView.exibirMensagem("Este aluno não possui disciplinas matriculadas.");
+                    menuView.exibirAviso("Este aluno não possui disciplinas matriculadas.");
                     break;
                 }
 
@@ -170,7 +170,7 @@ public class MenuController {
                 int opcDisc = menuView.obterInt("Escolha a disciplina (número): ");
 
                 if (opcDisc < 1 || opcDisc > alunoBuscado.getDisciplinas().size()) {
-                    menuView.exibirMensagem("Opção inválida.");
+                    menuView.exibirErro("Opção inválida.");
                     break;
                 }
 
@@ -182,7 +182,7 @@ public class MenuController {
             case 11: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
-                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    menuView.exibirAviso("Nenhum aluno cadastrado.");
                     break;
                 }
 
@@ -190,7 +190,7 @@ public class MenuController {
                 AlunoModel alunoBuscado = alunoCtrl.buscarAlunoPorMatricula(alunoSelecionado.getMatricula());
 
                 if (alunoBuscado == null) {
-                    menuView.exibirMensagem("Aluno não encontrado.");
+                    menuView.exibirErro("Aluno não encontrado.");
                     break;
                 }
 
@@ -201,13 +201,13 @@ public class MenuController {
             case 12: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
-                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    menuView.exibirAviso("Nenhum aluno cadastrado.");
                     break;
                 }
 
                 List<EstagioModel> estagios = estagCtrl.listarEstagios();
                 if (estagios.isEmpty()) {
-                    menuView.exibirMensagem("Nenhum estágio cadastrado.");
+                    menuView.exibirAviso("Nenhum estágio cadastrado.");
                     break;
                 }
 
@@ -216,7 +216,7 @@ public class MenuController {
                 AlunoModel alunoBuscado = alunoCtrl.buscarAlunoPorMatricula(alunoSelecionado.getMatricula());
 
                 if (alunoBuscado == null) {
-                    menuView.exibirMensagem("Aluno não encontrado.");
+                    menuView.exibirErro("Aluno não encontrado.");
                     break;
                 }
 
@@ -225,16 +225,16 @@ public class MenuController {
                 int opcEstagio = menuView.obterInt("Escolha o estágio (número): ");
 
                 if (opcEstagio < 1 || opcEstagio > estagios.size()) {
-                    menuView.exibirMensagem("Opção inválida.");
+                    menuView.exibirErro("Opção inválida.");
                     break;
                 }
 
                 EstagioModel estagioSelecionado = estagios.get(opcEstagio - 1);
 
                 if (alunoCtrl.matricularAlunoEmEstagio(alunoBuscado.getMatricula(), estagioSelecionado)) {
-                    menuView.exibirMensagem("Aluno matriculado no estágio com sucesso!");
+                    menuView.exibirSucesso("Aluno matriculado no estágio com sucesso!");
                 } else {
-                    menuView.exibirMensagem("Erro: aluno já matriculado neste estágio.");
+                    menuView.exibirErro("Aluno já matriculado neste estágio.");
                 }
 
                 break;
@@ -243,7 +243,7 @@ public class MenuController {
             case 13: {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
                 if (alunos.isEmpty()) {
-                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    menuView.exibirAviso("Nenhum aluno cadastrado.");
                     break;
                 }
 
@@ -251,12 +251,12 @@ public class MenuController {
                 AlunoModel aluno = alunoCtrl.buscarAlunoPorMatricula(alunoSel.getMatricula());
 
                 if (aluno == null) {
-                    menuView.exibirMensagem("Aluno não encontrado.");
+                    menuView.exibirErro("Aluno não encontrado.");
                     break;
                 }
 
                 if (aluno.getEstagios().isEmpty()) {
-                    menuView.exibirMensagem("Aluno não está matriculado em estágio.");
+                    menuView.exibirAviso("Aluno não está matriculado em estágio.");
                     break;
                 }
 
@@ -267,7 +267,7 @@ public class MenuController {
 
                 int opc = menuView.obterInt("Escolha o estágio (número): ");
                 if (opc < 1 || opc > aluno.getEstagios().size()) {
-                    menuView.exibirMensagem("Opção inválida.");
+                    menuView.exibirErro("Opção inválida.");
                     break;
                 }
 
@@ -276,17 +276,17 @@ public class MenuController {
                 double media = menuView.obterDouble("Digite a média do estágio (0-100): ");
 
                 if (alunoCtrl.registrarAvaliacaoEstagio(aluno.getMatricula(), estagio, media)) {
-                    menuView.exibirMensagem("Avaliação registrada com sucesso!");
+                    menuView.exibirSucesso("Avaliação registrada com sucesso!");
 
                     Double m = estagio.obterMedia(aluno.getMatricula());
-                    menuView.exibirMensagem("Média: " + m);
-                    menuView.exibirMensagem(
-                            estagio.aprovado(aluno.getMatricula())
-                                    ? "Status: APROVADO"
-                                    : "Status: REPROVADO"
-                    );
+                    menuView.exibirAviso("Média: " + m);
+                    if (estagio.aprovado(aluno.getMatricula())) {
+                        menuView.exibirSucesso("Status: APROVADO");
+                    } else {
+                        menuView.exibirErro("Status: REPROVADO");
+                    }
                 } else {
-                    menuView.exibirMensagem("Erro ao registrar avaliação.");
+                    menuView.exibirErro("Erro ao registrar avaliação.");
                 }
 
                 break;
@@ -315,7 +315,7 @@ public class MenuController {
                 List<AlunoModel> alunos = alunoCtrl.listarAlunos();
 
                 if (alunos.isEmpty()) {
-                    menuView.exibirMensagem("Nenhum aluno cadastrado.");
+                    menuView.exibirAviso("Nenhum aluno cadastrado.");
                     break;
                 }
 
@@ -324,7 +324,7 @@ public class MenuController {
                         alunoCtrl.buscarAlunoPorMatricula(alunoSelecionado.getMatricula());
 
                 if (alunoBuscado == null) {
-                    menuView.exibirMensagem("Aluno não encontrado.");
+                    menuView.exibirErro("Aluno não encontrado.");
                     break;
                 }
 
@@ -333,7 +333,7 @@ public class MenuController {
             }
                 
             default:
-                menuView.exibirMensagem("Opção inválida.");
+                menuView.exibirErro("Opção inválida.");
         }
     }
 }
